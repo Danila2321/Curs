@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://ir22fqnkiglt"]
+
+[ext_resource type="Script" path="res://scenes/RoadAnimation.gd" id="1_pnn70"]
+[ext_resource type="Texture2D" uid="uid://cxbrcjxfycrxo" path="res://assets/1556547969.png" id="1_uuvfi"]
+
+[sub_resource type="Animation" id="Animation_2kfmm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Sprite2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -477)]
+}
+
+[sub_resource type="Animation" id="Animation_7cjv6"]
+resource_name = "Run"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 478)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Sprite2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -477), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0us03"]
+_data = {
+"RESET": SubResource("Animation_2kfmm"),
+"Run": SubResource("Animation_7cjv6")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer"]
+autoplay = "Run"
+libraries = {
+"": SubResource("AnimationLibrary_0us03")
+}
+script = ExtResource("1_pnn70")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.766667, 0.74)
+texture = ExtResource("1_uuvfi")
+centered = false
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, -477)
+scale = Vector2(0.766667, 0.74)
+texture = ExtResource("1_uuvfi")
+centered = false

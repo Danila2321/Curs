@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcuc1awhjke0a"]
+
+[ext_resource type="Texture2D" uid="uid://cr5mej8pe36q8" path="res://assets/pitstop_car_1.png" id="1_mthcr"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_u1tuj"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ycmja"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_athj3"]
+emission_shape = 1
+emission_sphere_radius = 50.0
+particle_flag_disable_z = true
+angular_velocity_min = 50.0
+angular_velocity_max = 50.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 3.0
+scale_max = 5.0
+color = Color(0.968627, 0.164706, 0.254902, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8a476"]
+size = Vector2(57, 111)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3q810"]
+size = Vector2(56, 3.5)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 6
+script = ExtResource("1_u1tuj")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 2
+material = SubResource("CanvasItemMaterial_ycmja")
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_athj3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 1)
+scale = Vector2(0.13067, 0.117822)
+texture = ExtResource("1_mthcr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_8a476")
+
+[node name="CarDetector" type="Area2D" parent="."]
+disable_mode = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarDetector"]
+modulate = Color(0.65098, 0.286275, 0.0392157, 1)
+position = Vector2(0, -55.25)
+shape = SubResource("RectangleShape2D_3q810")
+
+[connection signal="body_entered" from="CarDetector" to="." method="_on_CarDetector_body_entered"]
