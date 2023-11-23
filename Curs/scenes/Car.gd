@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var gravity: int = 50
+@export var gravity: int = 100
 @onready var Start_position:  Vector2 = position 
 @onready var G: = get_node("/root/Global")
 
@@ -22,4 +22,5 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	G.add_car()
 	
 
-
+	
+	

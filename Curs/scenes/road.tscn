@@ -2,16 +2,24 @@
 
 [ext_resource type="PackedScene" uid="uid://bcuc1awhjke0a" path="res://scenes/player.tscn" id="2_gp8cc"]
 [ext_resource type="PackedScene" uid="uid://ir22fqnkiglt" path="res://scenes/RoadAnimation.tscn" id="2_lpynt"]
-[ext_resource type="PackedScene" uid="uid://cqx24ierq4sto" path="res://scenes/Car_setings.tscn" id="3_ngcdg"]
+[ext_resource type="PackedScene" uid="uid://cqx24ierq4sto" path="res://scenes/Car_Setigs.tscn" id="3_ngcdg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8a20v"]
 size = Vector2(102.875, 483)
 
 [node name="Road" type="Node2D"]
 
+[node name="Car5" parent="." instance=ExtResource("3_ngcdg")]
+z_index = 1
+position = Vector2(287, -78)
+
+[node name="Car2" parent="." instance=ExtResource("3_ngcdg")]
+z_index = 1
+position = Vector2(372, -199)
+
 [node name="Player" parent="." instance=ExtResource("2_gp8cc")]
 z_index = 1
-position = Vector2(372, 405)
+position = Vector2(287, 352)
 
 [node name="AnimationPlayer" parent="." instance=ExtResource("2_lpynt")]
 
@@ -26,14 +34,6 @@ collision_mask = 5
 position = Vector2(129.563, 133.5)
 shape = SubResource("RectangleShape2D_8a20v")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Node/Wall"]
-position = Vector2(130, -342.5)
-shape = SubResource("RectangleShape2D_8a20v")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Node/Wall"]
-position = Vector2(668, -342)
-shape = SubResource("RectangleShape2D_8a20v")
-
 [node name="Wall2" type="StaticBody2D" parent="Node"]
 position = Vector2(-76, 107)
 collision_layer = 2
@@ -45,12 +45,15 @@ shape = SubResource("RectangleShape2D_8a20v")
 
 [node name="Car" parent="." instance=ExtResource("3_ngcdg")]
 z_index = 1
-position = Vector2(469, -293)
+position = Vector2(469, -283)
 
 [node name="Car3" parent="." instance=ExtResource("3_ngcdg")]
 z_index = 1
-position = Vector2(228, -255)
+position = Vector2(228, -241)
 
 [node name="Car4" parent="." instance=ExtResource("3_ngcdg")]
 z_index = 1
-position = Vector2(372, -415)
+position = Vector2(372, -408)
+
+[connection signal="Crash" from="Player" to="AnimationPlayer" method="_on_player_crash"]
+[connection signal="Reset" from="Player" to="AnimationPlayer" method="_on_player_reset"]

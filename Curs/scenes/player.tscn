@@ -1,37 +1,81 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcuc1awhjke0a"]
+[gd_scene load_steps=20 format=3 uid="uid://bcuc1awhjke0a"]
 
 [ext_resource type="Texture2D" uid="uid://cr5mej8pe36q8" path="res://assets/pitstop_car_1.png" id="1_mthcr"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_u1tuj"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ycmja"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_athj3"]
-emission_shape = 1
-emission_sphere_radius = 50.0
-particle_flag_disable_z = true
-angular_velocity_min = 50.0
-angular_velocity_max = 50.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_min = 3.0
-scale_max = 5.0
-color = Color(0.968627, 0.164706, 0.254902, 1)
+[ext_resource type="Texture2D" uid="uid://bk8mcyx0llu43" path="res://assets/Exp1.com.png" id="3_dpv7p"]
+[ext_resource type="Texture2D" uid="uid://biihky7cxdgx0" path="res://assets/Exp2.com.png" id="4_jfeu6"]
+[ext_resource type="Texture2D" uid="uid://bnb4s1a3cvajp" path="res://assets/Exp3.com.png" id="5_hwrrk"]
+[ext_resource type="Texture2D" uid="uid://dprngg6j6cq4" path="res://assets/Exp4.com.png" id="6_q3lwx"]
+[ext_resource type="Texture2D" uid="uid://d4lxkq2i42ow2" path="res://assets/Exp5.png" id="7_b5mxm"]
+[ext_resource type="Texture2D" uid="uid://b7gavor10nnwe" path="res://assets/Exp6.png" id="8_5oyi4"]
+[ext_resource type="Texture2D" uid="uid://cs1bpbmtdyxvd" path="res://assets/Exp7.png" id="9_2awcg"]
+[ext_resource type="Texture2D" uid="uid://c7mpdkxxeto0w" path="res://assets/Exp8.png" id="10_p4ajb"]
+[ext_resource type="Texture2D" uid="uid://l6shjin34o5e" path="res://assets/Exp9.png" id="11_cxlpp"]
+[ext_resource type="Texture2D" uid="uid://bjpw742rorqp4" path="res://assets/Exp10.png" id="12_ldbmq"]
+[ext_resource type="Texture2D" uid="uid://b8kcp65iej1x2" path="res://assets/Exp11.png" id="13_4yno5"]
+[ext_resource type="Texture2D" uid="uid://cypixk3y1fp4x" path="res://assets/Exp12.png" id="14_3thdh"]
+[ext_resource type="Texture2D" uid="uid://bwvp4fywxtv88" path="res://assets/Exp13.png" id="15_glu43"]
+[ext_resource type="Texture2D" uid="uid://bggdw13bbwriq" path="res://assets/Exp14.png" id="16_5ieki"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8a476"]
 size = Vector2(57, 111)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3q810"]
-size = Vector2(56, 3.5)
+size = Vector2(57.5, 3.5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vwho0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dpv7p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jfeu6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_hwrrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q3lwx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_b5mxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_5oyi4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2awcg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_p4ajb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cxlpp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ldbmq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_4yno5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_3thdh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_glu43")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_5ieki")
+}],
+"loop": false,
+"name": &"Explosion",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 script = ExtResource("1_u1tuj")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-z_index = 2
-material = SubResource("CanvasItemMaterial_ycmja")
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_athj3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, 1)
@@ -44,11 +88,20 @@ shape = SubResource("RectangleShape2D_8a476")
 
 [node name="CarDetector" type="Area2D" parent="."]
 disable_mode = 2
-collision_mask = 4
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CarDetector"]
 modulate = Color(0.65098, 0.286275, 0.0392157, 1)
 position = Vector2(0, -55.25)
 shape = SubResource("RectangleShape2D_3q810")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-2, -32)
+scale = Vector2(0.19697, 0.199248)
+sprite_frames = SubResource("SpriteFrames_vwho0")
+animation = &"Explosion"
+frame = 9
+frame_progress = 0.223431
 
 [connection signal="body_entered" from="CarDetector" to="." method="_on_CarDetector_body_entered"]

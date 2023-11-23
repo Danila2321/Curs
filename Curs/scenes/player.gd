@@ -1,7 +1,10 @@
 extends CharacterBody2D
 
+signal Crash()
+signal Reset()
+
 @export var life: int = 3
-@export var speed: int = 200
+@export var speed: int = 700
 @onready var G: = get_node("/root/Global")
 var direction: int = 1
 
@@ -14,39 +17,21 @@ func _physics_process(delta):
 		direction = 1
 		velocity.x += direction * speed * delta
 	else:
-		velocity.x = lerp(direction * speed, 0, 0.9)
+		velocity.x = lerp(direction * speed, 0, 1)
 	
 		
 	
 	move_and_slide()
 
 
-
-		
-
-
-
-
-
-
-
-
-
-
-func _on_CarDetector_body_entered(body:Area2D):
-	print('f')
+func _on_CarDetector_body_entered(body:Node2D):
 	print('collision')
-	$GPUParticles2D.emitting = true
-		
-
-
-
+	emit_signal("Crash")
 	
-
-
-
-
-
-
-
-
+	$AnimatedSprite2D.show()
+	$AnimatedSprite2D.play("Explosion")
+	
+	
+	
+	
+	
