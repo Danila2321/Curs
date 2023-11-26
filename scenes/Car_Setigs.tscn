@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqx24ierq4sto"]
+
+[ext_resource type="Script" path="res://scenes/Car.gd" id="1_xs3ls"]
+[ext_resource type="Texture2D" uid="uid://k47prekp2ryj" path="res://assets/pitstop_car_3.png" id="2_rihlg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mk1yl"]
+size = Vector2(54, 125.5)
+
+[node name="Car" type="Node2D"]
+
+[node name="Car" type="CharacterBody2D" parent="."]
+z_index = 1
+platform_floor_layers = 4294901766
+platform_wall_layers = 3
+script = ExtResource("1_xs3ls")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Car"]
+position = Vector2(-2.47955e-05, 13)
+scale = Vector2(0.12959, 0.118812)
+texture = ExtResource("2_rihlg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Car"]
+position = Vector2(0, 7.25)
+shape = SubResource("RectangleShape2D_mk1yl")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Car"]
+position = Vector2(0.500002, -48.5)
+scale = Vector2(2.55, 0.65)
+metadata/_edit_group_ = true
+
+[connection signal="screen_exited" from="Car/VisibleOnScreenNotifier2D" to="Car" method="_on_visible_on_screen_notifier_2d_screen_exited"]

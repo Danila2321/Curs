@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjcu2av7vftht"]
+
+[ext_resource type="Script" path="res://scenes/Menu.gd" id="1_lp8jk"]
+[ext_resource type="Texture2D" uid="uid://cqv436tahdd68" path="res://assets/Road.jpg" id="2_puee1"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lp8jk")
+
+[node name="Road" type="Sprite2D" parent="."]
+position = Vector2(319.5, 240)
+scale = Vector2(0.625977, 0.46875)
+texture = ExtResource("2_puee1")
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 349.0
+offset_right = 372.0
+offset_bottom = 392.0
+text = "Play"
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 410.0
+offset_right = 372.0
+offset_bottom = 454.0
+text = "Exit
+"
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

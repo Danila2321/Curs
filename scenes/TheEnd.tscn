@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv6xk1m4om20m"]
+
+[ext_resource type="Script" path="res://Control.gd" id="1_yo2io"]
+[ext_resource type="PackedScene" uid="uid://ch5root6fvwlm" path="res://scenes/road.tscn" id="2_4bgc6"]
+
+[node name="TheEnd" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yo2io")
+road = ExtResource("2_4bgc6")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+offset_right = 638.0
+offset_bottom = 480.0
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 2
+offset_left = 275.0
+offset_top = 329.0
+offset_right = 378.0
+offset_bottom = 386.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+text = "Exit
+"
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 2
+offset_left = 274.0
+offset_top = 266.0
+offset_right = 378.0
+offset_bottom = 324.0
+size_flags_horizontal = 4
+size_flags_vertical = 5
+text = "Restart"
+
+[node name="Score" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 163.0
+offset_right = 446.0
+offset_bottom = 260.0
+
+[node name="BestScore" type="Label" parent="Score"]
+layout_mode = 2
+text = "Best score:"
+
+[node name="Result" type="Label" parent="Score"]
+layout_mode = 2
+text = "Score:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://ch5root6fvwlm"]
+
+[ext_resource type="Script" path="res://scenes/Road.gd" id="1_1smm0"]
+[ext_resource type="PackedScene" uid="uid://cived3c7xj30e" path="res://scenes/Car_Blue.tscn" id="2_8lvfr"]
+[ext_resource type="PackedScene" uid="uid://bcuc1awhjke0a" path="res://scenes/player.tscn" id="2_gp8cc"]
+[ext_resource type="PackedScene" uid="uid://ir22fqnkiglt" path="res://scenes/RoadAnimation.tscn" id="2_lpynt"]
+[ext_resource type="PackedScene" uid="uid://d10x6m7pf3lw6" path="res://scenes/Car_Yellow.tscn" id="3_pl7hg"]
+[ext_resource type="PackedScene" uid="uid://cqx24ierq4sto" path="res://scenes/Car_Setigs.tscn" id="4_v42j6"]
+[ext_resource type="PackedScene" uid="uid://d1vljhkkmllyi" path="res://scenes/ui.tscn" id="5_8fsx7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8a20v"]
+size = Vector2(20, 483)
+
+[node name="Road" type="Node2D"]
+script = ExtResource("1_1smm0")
+Cars = Array[PackedScene]([ExtResource("2_8lvfr"), ExtResource("4_v42j6"), ExtResource("3_pl7hg")])
+
+[node name="Player" parent="." instance=ExtResource("2_gp8cc")]
+z_index = 1
+position = Vector2(384, 366)
+
+[node name="AnimationPlayer" parent="." instance=ExtResource("2_lpynt")]
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Wall" type="StaticBody2D" parent="Walls"]
+position = Vector2(-76, 107)
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
+position = Vector2(85, 136)
+shape = SubResource("RectangleShape2D_8a20v")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls/Wall"]
+position = Vector2(85, -346)
+shape = SubResource("RectangleShape2D_8a20v")
+
+[node name="Wall2" type="StaticBody2D" parent="Walls"]
+position = Vector2(-76, 107)
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
+position = Vector2(706, 136)
+shape = SubResource("RectangleShape2D_8a20v")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls/Wall2"]
+position = Vector2(706, -349)
+shape = SubResource("RectangleShape2D_8a20v")
+
+[node name="Cars" type="Node" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("5_8fsx7")]
+
+[connection signal="Crash" from="Player" to="AnimationPlayer" method="_on_player_crash"]
+[connection signal="Crash" from="Player" to="UI" method="_on_player_crash"]
+[connection signal="Dead" from="Player" to="Player" method="_on_dead"]
+[connection signal="Reset" from="Player" to="AnimationPlayer" method="_on_player_reset"]
